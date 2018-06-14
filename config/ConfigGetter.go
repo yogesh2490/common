@@ -37,7 +37,7 @@ type configGetter struct {
 }
 
 /*
-	This method to create a configGetter with injected information.	
+	This method to create a configGetter with injected information.
 */
 func GetConfigGetter(config_file_path string) IConfigGetter {
 	return &configGetter{
@@ -56,7 +56,7 @@ func (this configGetter) MustGetConfigVar(variableName string) string {
 		config_map_lock.Unlock()
 		if !ok {
 			panic("FATAL ERROR COULD NOT LOAD VAR : " + variableName)
-		} 
+		}
 	}
 	return config
 }
@@ -93,7 +93,7 @@ func loadConfigFile(config_file string) {
 		}
 
 		config_map_lock.Lock()
-		json_err := json.Unmarshal(reader_result, $json_data)
+		json_err := json.Unmarshal(reader_result, json_data)
 		config_map_lock.Unlock()
 		if json_err != nil {
 			panic("FATAL ERROR COULD NOT UNMARSHAL CONFIG FILE " + config_file + " Err: " + json_err.Error())
