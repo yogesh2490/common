@@ -22,5 +22,5 @@ type IResult interface {
 	Infof(template string, args ...interface{})
 	Errorf(template string, args ...interface{})
 	Warningf(template string, args ...interface{})
-	DebugMessagef(template stringm args ...interface{})
+	DebugMessagef(template string, args ...interface{})
 }

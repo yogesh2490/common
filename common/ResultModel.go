@@ -10,15 +10,15 @@ import (
 
 //Implement IResult
 type apiResult struct {
-	debug				bool 			// True if the result should log Debug level logs
-	beautify_logs		bool			// True if the result should beautify the logs
-	messages			[]string		// And array of accumulated logs with context
-	was_successful 		bool			// True if the result was successful
-	log_level			int 			// The level to log out the messafes upon Flush
-	status_code			int 			// The status code that was returned from an external request
-	response_message 	string 			// The error Message returned from an external request
-	parent	 			chan []string 	// If this is a child, this will be the parent's channel
-	children 			[]chan []string // A slice of the channels connected to any childern that are created
+	debug            bool            // True if the result should log Debug level logs
+	beautify_logs    bool            // True if the result should beautify the logs
+	messages         []string        // And array of accumulated logs with context
+	was_successful   bool            // True if the result was successful
+	log_level        int             // The level to log out the messafes upon Flush
+	status_code      int             // The status code that was returned from an external request
+	response_message string          // The error Message returned from an external request
+	parent           chan []string   // If this is a child, this will be the parent's channel
+	children         []chan []string // A slice of the channels connected to any childern that are created
 }
 
 /*
@@ -37,8 +37,8 @@ func MakeAPIResult(config IConfigGetter) IResult {
 		beautify_logs = true
 	}
 
-	return &apiResult {
-		debug: debug,
+	return &apiResult{
+		debug:         debug,
 		beautify_logs: beautify_logs,
 	}
 }
@@ -47,18 +47,18 @@ func MakeAPIResult(config IConfigGetter) IResult {
 	This sets default logging level. It is for testing.
 */
 func MakeDefaultAPIRequest() IResult {
-	return &apiResult {
-		debug: true,
+	return &apiResult{
+		debug:         true,
 		beautify_logs: false,
 	}
 }
 
 func (this *apiResult) GetChild() IResult {
 	channel := make(chan []string)
-	child := &apiResult {
-		debug: this.debug,
+	child := &apiResult{
+		debug:         this.debug,
 		beautify_logs: this.beautify_logs,
-		parent: channels,
+		parent:        channels,
 	}
 	this.childern = append(this.childern, channel)
 
@@ -101,11 +101,11 @@ func (this *apiResult) Error() string {
 	if this.messages == nil {
 		return ""
 	}
-	return this.messages[len(this.messages) -1]
+	return this.messages[len(this.messages)-1]
 }
 
 /*
-	This is used for merging results 
+	This is used for merging results
 */
 func (this *apiResult) MergeWithResult(r IResult) {
 	if r == nil {
@@ -158,7 +158,7 @@ func (this *apiResult) SetStatusCode(code int) {
 
 /*
 	Get response error
-*/ 
+*/
 func (this *apiResult) GetResponseMessage() string {
 	return this.response_message
 }
@@ -219,11 +219,11 @@ func (this *apiResult) Warningf(templates string, args ...interface{}) {
 	Helper function to add logs
 */
 func (this *apiResult) addLog(header string, org_msg string) {
-	_, file, line,_ := runtime.Caller(2)
+	_, file, line, _ := runtime.Caller(2)
 
 	org_msg = strings.TrimSuffix(org_msg, "\n")
 	output := fmt.Sprintf(
-		header + " %s %s %s::%d",
+		header+" %s %s %s::%d",
 		org_msg,
 		time.Now(),
 		file,
@@ -268,7 +268,7 @@ func (this *apiResult) Flush() {
 		case child_output := <-child:
 			this.messages = append(this.messages, child_output...)
 		case <-time.After(time.Minute * 5):
-			this.Errorf("CHILD %d DID NOT COME HOME!! We're flushing without them", i+1) 
+			this.Errorf("CHILD %d DID NOT COME HOME!! We're flushing without them", i+1)
 		}
 	}
 
@@ -309,13 +309,3 @@ func (this *apiResult) Flush() {
 
 	this.messages = []string{}
 }
-
-
-
-
-
-
-
-
-
-

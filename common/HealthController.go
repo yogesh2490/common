@@ -33,4 +33,3 @@ func (this *healthController) GetHealth(w http.ResponseWriter, r *http.Request) 
 	w.WriteHeader(http.StatusOK)
 	w.Write(result)
 }
-	
