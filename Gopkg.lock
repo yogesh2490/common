@@ -4,8 +4,8 @@
 [[projects]]
   name = "github.com/couchbase/gocb"
   packages = ["."]
-  revision = "40eafe80a794c46d9aa8111c5ab6a3ee9810b5f5"
-  version = "v1.3.6"
+  revision = "699b13a51af5dd4f80ff3deedf41bba60debad32"
+  version = "v1.3.7"
 
 [[projects]]
   name = "github.com/dgrijalva/jwt-go"
@@ -32,6 +32,12 @@
   version = "v1.3.0"
 
 [[projects]]
+  branch = "master"
+  name = "github.com/logrusorgru/aurora"
+  packages = ["."]
+  revision = "d694e6f975a9109e2b063829d563a7c153c4b53c"
+
+[[projects]]
   name = "github.com/opentracing/opentracing-go"
   packages = [
     ".",
@@ -51,7 +57,7 @@
     "idna",
     "publicsuffix"
   ]
-  revision = "db08ff08e8622530d9ed3a0e8ac279f6d4c02196"
+  revision = "afe8f62b1d6bbd81f31868121a50b06d8188e1f9"
 
 [[projects]]
   name = "golang.org/x/text"
@@ -77,8 +83,8 @@
 [[projects]]
   name = "gopkg.in/couchbase/gocbcore.v7"
   packages = ["."]
-  revision = "b83e7ae1df3e664ec54638717803154f12223de2"
-  version = "v7.1.1"
+  revision = "536234ccff8c44ae6a95c4356b1fdb6b5d0b2933"
+  version = "v7.1.2"
 
 [[projects]]
   name = "gopkg.in/couchbaselabs/gocbconnstr.v1"
@@ -101,6 +107,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "0519e2df4b033ff52420e41efe8684c5c4810db736d5125fdf20ea3234410c03"
+  inputs-digest = "0c241e51d5547017cc3eb9dc26b91de6fbf318938aad85cb22d7360b57189d5f"
   solver-name = "gps-cdcl"
   solver-version = 1

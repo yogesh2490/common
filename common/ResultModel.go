@@ -6,6 +6,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
+	. "github.com/logrusorgru/aurora"
 )
 
 //Implement IResult
@@ -178,7 +179,7 @@ func (this *apiResult) Debugf(templates string, args ...interface{}) {
 		return
 	}
 
-	original_message := fnt.Sprintf(templates, args...)
+	original_message := fmt.Sprintf(Blue(templates), args...)
 	this.addLog("[Debug]", original_message)
 }
 
@@ -189,7 +190,7 @@ func (this *apiResult) Infof(templates string, args ...interface{}) {
 	if this.log_level < 1 {
 		this.log_level = 1
 	}
-	original_message := fmt.Sprintf(templates, args...)
+	original_message := fmt.Sprintf(Green(templates), args...)
 	this.addLog("[Info]", original_message)
 }
 
@@ -200,7 +201,7 @@ func (this *apiResult) Errorf(templates string, args ...interface{}) {
 	if this.log_level < 2 {
 		this.log_level = 2
 	}
-	original_message := fmt.Sprintf(templates, args...)
+	original_message := fmt.Sprintf(Red(templates), args...)
 	this.addLog("[Error]", original_message)
 }
 
