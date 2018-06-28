@@ -62,6 +62,25 @@ func (this configGetter) MustGetConfigVar(variableName string) string {
 }
 
 /*
+
+*/
+func (this configGetter) SafeGetConfigVar(variableName string) string {
+	config := os.Getenv(variableName)
+	if config == "" {
+		this.loadDefaults()
+		this.loadConfig()
+		ok := false
+		config_map_lock.Lock()
+		config, ok = json_data[variableName]
+		config_map_lock.Unlock()
+		if !ok {
+			return ""
+		}
+	}
+	return config
+}
+
+/*
 	Loads the config ovverridden values.
 */
 func (this configGetter) loadConfig() {
