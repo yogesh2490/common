@@ -10,7 +10,7 @@ type IResult interface {
 	Succeed()
 	Fail()
 	Error() string
-	GetMeaages() []string
+	GetMessages() []string
 	MergeWithResult(r IResult)
 	GetLogLevel() int
 	GetStatusCode() int

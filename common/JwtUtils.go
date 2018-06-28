@@ -74,6 +74,7 @@ func (this JwtUtil) DecodeApplicationJwt(fullTokenString string) (models.AppJwtC
 			return models.AppJwtClaims{}, EXPIRED_TOKEN_ERR
 		} else if ve.Errors&(jwtgo.ValidationErrorIssuer) != 0 {
 			fmt.Println("Token signed by wrong issuer: %v", err)
+			return models.AppJwtClaims{}, WITHHELD_TOKEN_ERR
 		} else {
 			fmt.Println("Ivalid Token: %v", err)
 			return models.AppJwtClaims{}, WITHHELD_TOKEN_ERR

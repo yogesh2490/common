@@ -6,7 +6,6 @@ import (
 	"strconv"
 	"strings"
 	"time"
-	. "github.com/logrusorgru/aurora"
 )
 
 //Implement IResult
@@ -28,7 +27,7 @@ type apiResult struct {
 func MakeAPIResult(config IConfigGetter) IResult {
 	debug := false
 	beautify_logs := false
-	log_level := config.SafeGetCinfigVar("LOGGING_LEVEL")
+	log_level := config.SafeGetConfigVar("LOGGING_LEVEL")
 
 	if log_level == "DEBUG" {
 		debug = true
@@ -59,9 +58,9 @@ func (this *apiResult) GetChild() IResult {
 	child := &apiResult{
 		debug:         this.debug,
 		beautify_logs: this.beautify_logs,
-		parent:        channels,
+		parent:        channel,
 	}
-	this.childern = append(this.childern, channel)
+	this.children = append(this.children, channel)
 
 	parent_log := fmt.Sprintf("[CHILD #%s STARTED]\n", strconv.Itoa(len(this.children)))
 	this.messages = append(this.messages, parent_log)
@@ -179,7 +178,7 @@ func (this *apiResult) Debugf(templates string, args ...interface{}) {
 		return
 	}
 
-	original_message := fmt.Sprintf(Blue(templates), args...)
+	original_message := fmt.Sprintf((templates), args...)
 	this.addLog("[Debug]", original_message)
 }
 
@@ -190,7 +189,7 @@ func (this *apiResult) Infof(templates string, args ...interface{}) {
 	if this.log_level < 1 {
 		this.log_level = 1
 	}
-	original_message := fmt.Sprintf(Green(templates), args...)
+	original_message := fmt.Sprintf((templates), args...)
 	this.addLog("[Info]", original_message)
 }
 
@@ -201,7 +200,7 @@ func (this *apiResult) Errorf(templates string, args ...interface{}) {
 	if this.log_level < 2 {
 		this.log_level = 2
 	}
-	original_message := fmt.Sprintf(Red(templates), args...)
+	original_message := fmt.Sprintf((templates), args...)
 	this.addLog("[Error]", original_message)
 }
 
